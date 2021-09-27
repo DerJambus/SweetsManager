@@ -1,0 +1,89 @@
+﻿@page "/"
+@using SweetsManager.Components
+
+<h1>Die interaktive Schokoliste</h1>
+<button class="btn btn-success" @onclick="@AddChoclate">Schokolade hinzufügen</button>
+<table class="table-primary">
+    <thead>
+        <tr>
+            <th>
+                Name
+                @if (_nameASC)
+                {
+                    <i class="oi oi-chevron-bottom" @onclick="() => Sort(1)">
+                    </i>
+                }
+
+                @if (_nameASC == false)
+                {
+                    <i class="oi oi-chevron-top" @onclick="() => Sort(5)">
+                    </i>
+                }
+            </th>
+            <th>
+                Hersteller
+                @if (_vendorASC)
+                {
+                    <i class="oi oi-chevron-bottom" @onclick="() => Sort(2)">
+                    </i>
+                }
+
+                @if (_vendorASC == false)
+                {
+                    <i class="oi oi-chevron-top" @onclick="() => Sort(6)">
+                    </i>
+                }
+            </th>
+            <th>
+                Kakaoanteil
+                @if (_radeOfCacaoASC)
+                {
+                    <i class="oi oi-chevron-bottom" @onclick="() => Sort(3)">
+                    </i>
+                }
+
+                @if (_radeOfCacaoASC == false)
+                {
+                    <i class="oi oi-chevron-top" @onclick="() => Sort(7)">
+                    </i>
+                }
+            </th>
+            <th>
+                Schmeckt sehr süß
+                @if (_isTooSweetASC)
+                {
+                    <i class="oi oi-chevron-bottom" @onclick="() => Sort(4)">
+                    </i>
+                }
+
+                @if (_isTooSweetASC == false)
+                {
+                    <i class="oi oi-chevron-top" @onclick="() => Sort(8)">
+                    </i>
+                }
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Choclate choc in _choclates)
+        {
+            <tr>
+                <td>@choc._name</td>
+                <td>@choc._vendor</td>
+                <td>@choc._radeOfCacao</td>
+                <td>@choc._isToSweet</td>
+                <td><button class="btn btn-success" @onclick="() => EditChoclate(choc)">Ändern</button></td>
+                <td><button @onclick="() => DeleteAsync(choc)" class="btn btn-danger">Löschen</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<output>@SysStat</output>
+@if (_showDialog)
+{
+    <AddChoclate @bind-ChoclateList="_choclates" @bind-ShowDialog="_showDialog"></AddChoclate>
+}
+@if (_showEditDialog)
+{
+    <EditChoclate @bind-Choc="@Choc" @bind-ShowDialog="@_showEditDialog"></EditChoclate>
+}

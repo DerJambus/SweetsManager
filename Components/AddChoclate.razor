@@ -1,0 +1,70 @@
+﻿<div class="modal fade show d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Schokolade hinzufügen</h4>
+                <button class="close" 
+                        type="button" 
+                        data-dismiss="modal" 
+                        aria-label="Close" 
+                        @onclick="Close" >
+                    <span>&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <EditForm Model="@Choclate" OnValidSubmit="@HandleValidSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="form-group">
+                        <label for="name">
+                            Name:
+                        </label>
+                            <InputText id="name"
+                                       class="form-control"
+                                       @bind-Value="@Choclate._name"
+                                       placeholder="Name der Schokolade">
+                            </InputText>
+                            <ValidationMessage For="@(()=>Choclate._name)" />
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vendor">
+                            Hersteller:
+                        </label>
+                            <InputText id="vendor"
+                                       class="form-control"
+                                       @bind-Value="@Choclate._vendor"
+                                       placeholder="Hersteller">
+                            </InputText>
+                            <ValidationMessage For="@(()=>Choclate._vendor)" />
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="ccr">
+                            Kakaoanteil in %:
+                        </label>
+                            <InputNumber id="ccr"
+                                       class="form-control"
+                                       @bind-Value="@Choclate._radeOfCacao"
+                                       placeholder="Kakaoanteil in %">
+                            </InputNumber>
+                            <ValidationMessage For="@(()=>Choclate._radeOfCacao)" />
+                    </div>
+                    <div class="form-group">
+                        <label for="tooSweet">
+                            Schmeckt sehr süß:
+                        </label>
+                            <InputCheckbox id="tooSweet"
+                                       class="form-control"
+                                       @bind-Value="@Choclate._isToSweet">
+                            </InputCheckbox>
+                            <ValidationMessage For="@(()=>Choclate._isToSweet)" />
+                    </div>
+                    <button type="submit" class=" btn btn-success">Speichern</button>
+                    <button @onclick="@Close" class="btn btn-danger">Abbrechen</button>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
